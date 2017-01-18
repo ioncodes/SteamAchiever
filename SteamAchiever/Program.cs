@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Microsoft.CSharp;
 using Newtonsoft.Json.Linq;
 
-
 namespace SteamAchiever
 {
     class Program

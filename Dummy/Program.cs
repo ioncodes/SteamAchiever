@@ -13,8 +13,7 @@ namespace Dummy
     {
         static void Main(string[] args)
         {
-            Steam steam = new Steam();
-            var games = steam.GetGames();
+            var games = Steam.GetGames();
             var gamesFile = new NameValueCollection();
             foreach (var game in games)
             {
