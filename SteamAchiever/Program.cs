@@ -19,12 +19,12 @@ namespace SteamAchiever
         static void Main(string[] args)
         {
             var games = LoadGames();
-            Parallel.For(0, games.Count, i =>
+            for (int i = 0; i < games.Count; i++)
             {
                 Console.WriteLine(games.GetKey(i));
                 SpoofID(games.GetKey(i));
                 Parallel.ForEach(games.Get(i).Split(','), Spoof);
-            });
+            }
             Console.WriteLine("Done");
             Console.Read();
         }
