@@ -45,17 +45,24 @@ namespace API
             var achievs = new List<Achievement>();
             if (JObject.Parse(apiJson)["game"]["availableGameStats"] != null && JObject.Parse(apiJson)["game"]["availableGameStats"]["achievements"] != null)
             {
-                float percentage = 0.0F;
                 achievs.AddRange(JObject.Parse(apiJson)["game"]["availableGameStats"]["achievements"].Children()
-                    .Where(achievement => SteamUserStats.GetAchievementAchievedPercent(achievement["name"].ToString(), out percentage))
-                    .Where(achievement => percentage < 100)
                     .Select(achievment => new Achievement()
                 {
                     Name = achievment.SelectToken("name").ToString(),
                     RealName = achievment.SelectToken("displayName").ToString()
                 }));
             }
-            return achievs;
+            var list = new List<Achievement>();
+            foreach (var a in achievs)
+            {
+                float percentage = 0;
+                SteamUserStats.GetAchievementAchievedPercent(a.Name, out percentage);
+                if (percentage < 100)
+                {
+                    list.Add(a);
+                }
+            }
+            return list;
         }
     }
 }
