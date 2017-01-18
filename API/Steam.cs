@@ -52,17 +52,7 @@ namespace API
                     RealName = achievment.SelectToken("displayName").ToString()
                 }));
             }
-            var list = new List<Achievement>();
-            foreach (var a in achievs)
-            {
-                float percentage = 0;
-                SteamUserStats.GetAchievementAchievedPercent(a.Name, out percentage);
-                if (percentage < 100)
-                {
-                    list.Add(a);
-                }
-            }
-            return list;
+            return achievs;
         }
     }
 }
